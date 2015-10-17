@@ -2,6 +2,6 @@
 <plugin id="org.dita-ot.html">
   <feature extension="package.version" value="2.0.0"/>
   <transtype name="org.dita-ot.html"/>
-  <feature extension="dita.conductor.target.relative" file="build.xml"/>
+  <feature extension="dita.conductor.target.relative" file="integrator.xml"/>
   <feature extension="dita.conductor.xhtml.param" file="params.xml"/>
 </plugin>

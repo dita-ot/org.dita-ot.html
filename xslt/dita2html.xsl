@@ -7,8 +7,8 @@
                 exclude-result-prefixes="xs dita-ot ditamsg">
   
   <xsl:import href="plugin:org.dita.xhtml:xsl/dita2html-base.xsl"/>
-  <xsl:import href="plugin:org.dita.xhtml:xsl/xslhtml/dita2html5Impl.xsl"/>
-  <xsl:import href="plugin:org.dita.xhtml:xsl/xslhtml/hi-d2html5.xsl"/>
+  <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/dita2html5Impl.xsl"/>
+  <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/hi-d2html5.xsl"/>
   <xsl:import href="plugin:org.dita.xhtml:xsl/map2htmtoc/map2htmlImpl.xsl"/>
 
   <xsl:param name="FILEDIR"/>
