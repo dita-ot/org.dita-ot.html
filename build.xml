@@ -21,6 +21,6 @@
                    preprocess,
                    copy-revflag,
                    org.dita-ot.html,
-                   xhtml.topics"/>
+                   html5.topic"/>
   
 </project>
