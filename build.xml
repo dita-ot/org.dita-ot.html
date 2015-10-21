@@ -5,22 +5,13 @@
     <property name="html-version" value="html5"/>
     <property name="args.xsl" location="${dita.plugin.org.dita-ot.html.dir}/xslt/dita2html.xsl"/>
   </target>
-  
-  <target name="org.dita-ot.html">
-    <loadfile property="org.dita-ot.html.map" srcfile="${dita.temp.dir}/${user.input.file.listfile}">
-      <filterchain>
-        <headfilter lines="1"/>
-      </filterchain>
-    </loadfile>
-    <makeurl property="org.dita-ot.html.map.url" file="${dita.temp.dir}/${org.dita-ot.html.map}"/>
-  </target>
-  
+    
   <target name="dita2org.dita-ot.html"
           depends="org.dita-ot.html.init,
+                   html5.init,
                    build-init,
                    preprocess,
                    copy-revflag,
-                   org.dita-ot.html,
                    html5.topic"/>
   
 </project>
