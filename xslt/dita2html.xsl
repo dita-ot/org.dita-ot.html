@@ -29,6 +29,9 @@
     <xsl:text>title: "</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
     <xsl:text>"&#xA;</xsl:text>
+    <xsl:text>index: "</xsl:text>
+    <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
+    <xsl:text>"&#xA;</xsl:text>
     <xsl:text>---&#xA;</xsl:text>
   </xsl:template>
 
@@ -39,14 +42,14 @@
   <xsl:template match="*" mode="chapterBody">
     <xsl:call-template name="generateBreadcrumbs"/>
     <xsl:call-template name="gen-user-sidetoc"/>
-    <main class="col-md-9">
+    <main class="col-md-9" role="main">
       <xsl:apply-templates/>
       <xsl:call-template name="gen-endnotes"/>
     </main>
   </xsl:template>
 
   <xsl:template match="*" mode="gen-user-sidetoc">
-    <nav class="col-md-3">
+    <nav class="col-md-3" role="toc">
       <div class="well well-sm">
         <ul class="nav bs-docs-sidenav">
           <xsl:apply-templates select="$current-topicrefs[1]" mode="toc-pull">

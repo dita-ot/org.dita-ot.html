@@ -4,6 +4,8 @@
   <target name="org.dita-ot.html.init">
     <property name="html-version" value="html5"/>
     <property name="args.xsl" location="${dita.plugin.org.dita-ot.html.dir}/xslt/dita2html.xsl"/>
+    <property name="args.xhtml.toc.xsl" location="${dita.plugin.org.dita-ot.html.dir}/xslt/map2html5-cover.xsl"/>
+    <property name="args.xhtml.toc" value="toc"/>
   </target>
     
   <target name="dita2org.dita-ot.html"
@@ -12,6 +14,7 @@
                    build-init,
                    preprocess,
                    copy-revflag,
-                   html5.topic"/>
+                   html5.topic,
+                   html5.map"/>
   
 </project>
