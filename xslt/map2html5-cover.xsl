@@ -21,7 +21,7 @@
         <div class="well well-sm">
           <ul>
             <xsl:call-template name="commonattributes">
-              <xsl:with-param name="default-output-class">nav bs-docs-sidenav</xsl:with-param>
+              <xsl:with-param name="default-output-class">bs-docs-sidenav</xsl:with-param>
             </xsl:call-template>
             <xsl:apply-templates select="*[contains(@class, ' map/topicref ')]" mode="toc">
               <xsl:with-param name="pathFromMaplist" select="$pathFromMaplist"/>
