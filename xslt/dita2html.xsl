@@ -5,7 +5,7 @@
                 xmlns:ditamsg="http://dita-ot.sourceforge.net/ns/200704/ditamsg"
                 version="2.0"
                 exclude-result-prefixes="xs dita-ot ditamsg">
-  
+
   <xsl:import href="plugin:org.dita.xhtml:xsl/dita2html-base.xsl"/>
   <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/dita2html5Impl.xsl"/>
   <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/hi-d2html5.xsl"/>
@@ -14,6 +14,8 @@
               encoding="UTF-8"
               indent="no"
               omit-xml-declaration="yes"/>
+
+  <xsl:param name="commit"/>
 
   <xsl:template match="/">
     <xsl:apply-templates select="*" mode="jekyll-front-matter"/>
@@ -32,6 +34,11 @@
     <xsl:text>index: "</xsl:text>
     <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
     <xsl:text>"&#xA;</xsl:text>
+    <xsl:if test="normalize-space($commit)">
+      <xsl:text>commit: "</xsl:text>
+      <xsl:value-of select="normalize-space($commit)"/>
+      <xsl:text>"&#xA;</xsl:text>
+    </xsl:if>
     <xsl:text>---&#xA;</xsl:text>
   </xsl:template>
 
@@ -64,9 +71,9 @@
       </div>
     </nav>
   </xsl:template>
-  
+
   <xsl:attribute-set name="nav.ul">
     <xsl:attribute name="class">nav nav-list</xsl:attribute>
   </xsl:attribute-set>
-  
+
 </xsl:stylesheet>
