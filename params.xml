@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <params>
   <param name="commit" expression="${commit}" if="commit"/>
-  <param name="LAYOUT" expression="${jekyll.layout}" if="jekyll.layout"/>
+  <param name="layout" expression="${jekyll.layout}" if="jekyll.layout"/>
 </params>
