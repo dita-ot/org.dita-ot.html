@@ -16,6 +16,7 @@
               omit-xml-declaration="yes"/>
 
   <xsl:param name="commit"/>
+  <xsl:param name="LAYOUT" select="'base'" as="xs:string"/>
 
   <xsl:template match="/">
     <xsl:apply-templates select="*" mode="jekyll-front-matter"/>
@@ -43,7 +44,7 @@
   </xsl:template>
 
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
-    <xsl:text>base</xsl:text>
+	  <xsl:value-of select="$LAYOUT"/>
   </xsl:template>
 
   <xsl:template match="*" mode="chapterBody">
