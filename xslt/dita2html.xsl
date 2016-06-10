@@ -6,9 +6,7 @@
                 version="2.0"
                 exclude-result-prefixes="xs dita-ot ditamsg">
 
-  <xsl:import href="plugin:org.dita.xhtml:xsl/dita2html-base.xsl"/>
-  <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/dita2html5Impl.xsl"/>
-  <xsl:import href="plugin:org.dita.html5:xsl/xslhtml/hi-d2html5.xsl"/>
+  <xsl:import href="plugin:org.dita.html5:xsl/dita2html5Impl.xsl"/>
 
   <xsl:output method="html"
               encoding="UTF-8"
