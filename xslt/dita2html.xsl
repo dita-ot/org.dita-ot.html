@@ -38,7 +38,7 @@
       <xsl:value-of select="normalize-space($commit)"/>
       <xsl:text>"&#xA;</xsl:text>
     </xsl:if>
-    <xsl:if test="contains(/*/@outputclass, 'generated') or contains(/*/title[1]/@outputclass, 'generated')">
+    <xsl:if test="(/* | /*/*[contains(@class, ' topic/title ')])[tokenize(@outputclass, '\s+') = 'generated']">
       <xsl:text>generated: true</xsl:text>
       <xsl:text>&#xA;</xsl:text>
     </xsl:if>
