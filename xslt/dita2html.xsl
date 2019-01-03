@@ -52,14 +52,14 @@
   <xsl:template match="*" mode="chapterBody">
     <xsl:call-template name="generateBreadcrumbs"/>
     <xsl:call-template name="gen-user-sidetoc"/>
-    <main class="col-md-9" role="main">
+    <main class="col-lg-9" role="main">
       <xsl:apply-templates/>
       <xsl:call-template name="gen-endnotes"/>
     </main>
   </xsl:template>
 
   <xsl:template match="*" mode="gen-user-sidetoc">
-    <nav class="col-md-3" role="toc">
+    <nav class="col-lg-3" role="toc">
       <div class="well well-sm">
         <ul class="bs-docs-sidenav">
           <xsl:apply-templates select="$current-topicrefs[1]" mode="toc-pull">
