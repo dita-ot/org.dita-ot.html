@@ -16,7 +16,7 @@
     <xsl:if test="descendant::*[contains(@class, ' map/topicref ')]
                                [not(@toc = 'no')]
                                [not(@processing-role = 'resource-only')]">
-      <nav class="col-md-3" role="toc">
+      <nav class="col-lg-3" role="toc">
         <div class="well well-sm">
           <ul>
             <xsl:call-template name="commonattributes">
