@@ -60,20 +60,31 @@
   </xsl:attribute-set>
 
   <xsl:template match="*" mode="gen-user-sidetoc">
-    <nav xsl:use-attribute-sets="toc">
-      <div class="well well-sm">
-        <ul class="bs-docs-sidenav">
-          <xsl:apply-templates select="$current-topicref" mode="toc-pull">
-            <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
-            <xsl:with-param name="children" as="element()*">
-              <xsl:apply-templates select="$current-topicref/*[contains(@class, ' map/topicref ')]" mode="toc">
-                <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
-              </xsl:apply-templates>
-            </xsl:with-param>
-          </xsl:apply-templates>
-        </ul>
-      </div>
-    </nav>
+    <xsl:if test="$nav-toc = ('partial', 'full')">
+      <nav xsl:use-attribute-sets="toc">
+        <div class="well well-sm">
+          <ul class="bs-docs-sidenav">
+            <xsl:choose>
+              <xsl:when test="$nav-toc = 'partial'">
+                <xsl:apply-templates select="$current-topicref" mode="toc-pull">
+                  <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
+                  <xsl:with-param name="children" as="element()*">
+                    <xsl:apply-templates select="$current-topicref/*[contains(@class, ' map/topicref ')]" mode="toc">
+                      <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
+                    </xsl:apply-templates>
+                  </xsl:with-param>
+                </xsl:apply-templates>
+              </xsl:when>
+              <xsl:when test="$nav-toc = 'full'">
+                <xsl:apply-templates select="$input.map" mode="toc">
+                  <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
+                </xsl:apply-templates>
+              </xsl:when>
+            </xsl:choose>
+          </ul>
+        </div>
+      </nav>
+    </xsl:if>
   </xsl:template>
 
   <xsl:attribute-set name="nav.ul">
