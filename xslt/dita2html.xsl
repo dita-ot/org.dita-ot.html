@@ -63,10 +63,10 @@
     <nav xsl:use-attribute-sets="toc">
       <div class="well well-sm">
         <ul class="bs-docs-sidenav">
-          <xsl:apply-templates select="$current-topicrefs[1]" mode="toc-pull">
+          <xsl:apply-templates select="$current-topicref" mode="toc-pull">
             <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
             <xsl:with-param name="children" as="element()*">
-              <xsl:apply-templates select="$current-topicrefs[1]/*[contains(@class, ' map/topicref ')]" mode="toc">
+              <xsl:apply-templates select="$current-topicref/*[contains(@class, ' map/topicref ')]" mode="toc">
                 <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
               </xsl:apply-templates>
             </xsl:with-param>
