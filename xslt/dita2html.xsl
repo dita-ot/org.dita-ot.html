@@ -59,11 +59,14 @@
     <xsl:attribute name="role">toc</xsl:attribute>
   </xsl:attribute-set>
 
+  <!-- Override `nav.xsl` to add Bootstrap classes -->
   <xsl:template match="*" mode="gen-user-sidetoc">
     <xsl:if test="$nav-toc = ('partial', 'full')">
       <nav xsl:use-attribute-sets="toc">
+        <!-- ↓ Wrap <ul> in small well <div> & add .bs-docs-sidenav class -->
         <div class="well well-sm">
           <ul class="bs-docs-sidenav">
+            <!-- ↑ End customization -->
             <xsl:choose>
               <xsl:when test="$nav-toc = 'partial'">
                 <xsl:apply-templates select="$current-topicref" mode="toc-pull">
@@ -82,7 +85,9 @@
               </xsl:when>
             </xsl:choose>
           </ul>
+        <!-- ↓ Close Bootstrap div -->
         </div>
+        <!-- ↑ End customization -->
       </nav>
     </xsl:if>
   </xsl:template>
