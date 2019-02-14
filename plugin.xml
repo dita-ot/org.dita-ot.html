@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin id="org.dita-ot.html">
   <feature extension="package.version" value="2.0.0"/>
+  <require plugin="org.dita.html5"/>
   <transtype name="org.dita-ot.html"/>
   <feature extension="ant.import" file="build_dita2org.dita-ot.html.xml"/>
   <feature extension="dita.conductor.html5.param" file="params.xml"/>
