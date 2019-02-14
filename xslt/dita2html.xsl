@@ -58,39 +58,6 @@
     <xsl:attribute name="role">toc</xsl:attribute>
   </xsl:attribute-set>
 
-  <!-- Override `nav.xsl` to add Bootstrap classes -->
-  <xsl:template match="*" mode="gen-user-sidetoc">
-    <xsl:if test="$nav-toc = ('partial', 'full')">
-      <nav xsl:use-attribute-sets="toc">
-        <!-- ↓ Wrap <ul> in small well <div> & add .bs-docs-sidenav class -->
-        <div class="well well-sm">
-          <ul class="bs-docs-sidenav">
-            <!-- ↑ End customization -->
-            <xsl:choose>
-              <xsl:when test="$nav-toc = 'partial'">
-                <xsl:apply-templates select="$current-topicref" mode="toc-pull">
-                  <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
-                  <xsl:with-param name="children" as="element()*">
-                    <xsl:apply-templates select="$current-topicref/*[contains(@class, ' map/topicref ')]" mode="toc">
-                      <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
-                    </xsl:apply-templates>
-                  </xsl:with-param>
-                </xsl:apply-templates>
-              </xsl:when>
-              <xsl:when test="$nav-toc = 'full'">
-                <xsl:apply-templates select="$input.map" mode="toc">
-                  <xsl:with-param name="pathFromMaplist" select="$PATH2PROJ" as="xs:string"/>
-                </xsl:apply-templates>
-              </xsl:when>
-            </xsl:choose>
-          </ul>
-        <!-- ↓ Close Bootstrap div -->
-        </div>
-        <!-- ↑ End customization -->
-      </nav>
-    </xsl:if>
-  </xsl:template>
-
   <xsl:attribute-set name="nav.ul">
     <xsl:attribute name="class">nav nav-list</xsl:attribute>
   </xsl:attribute-set>
