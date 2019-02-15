@@ -44,9 +44,8 @@
     <xsl:text>---&#xA;</xsl:text>
   </xsl:template>
 
+  <!-- Remove redundant <body> element (added later by Jekyll’s base layout) -->
   <xsl:template match="*" mode="chapterBody">
-    <body>
-      <xsl:apply-templates select="." mode="addAttributesToHtmlBodyElement"/>
       <xsl:call-template name="setaname"/>  <!-- For HTML4 compatibility, if needed -->
       <xsl:apply-templates select="." mode="addHeaderToHtmlBodyElement"/>
 
@@ -55,7 +54,6 @@
 
       <xsl:apply-templates select="." mode="addContentToHtmlBodyElement"/>
       <xsl:apply-templates select="." mode="addFooterToHtmlBodyElement"/>
-    </body>
   </xsl:template>
 
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
