@@ -44,6 +44,20 @@
     <xsl:text>---&#xA;</xsl:text>
   </xsl:template>
 
+  <xsl:template match="*" mode="chapterBody">
+    <body>
+      <xsl:apply-templates select="." mode="addAttributesToHtmlBodyElement"/>
+      <xsl:call-template name="setaname"/>  <!-- For HTML4 compatibility, if needed -->
+      <xsl:apply-templates select="." mode="addHeaderToHtmlBodyElement"/>
+
+      <!-- Include a user's XSL call here to generate a toc based on what's a child of topic -->
+      <xsl:call-template name="gen-user-sidetoc"/>
+
+      <xsl:apply-templates select="." mode="addContentToHtmlBodyElement"/>
+      <xsl:apply-templates select="." mode="addFooterToHtmlBodyElement"/>
+    </body>
+  </xsl:template>
+
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
     <xsl:value-of select="$layout"/>
   </xsl:template>
