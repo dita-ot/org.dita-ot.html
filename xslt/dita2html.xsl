@@ -41,7 +41,7 @@
       <xsl:text>generated: true</xsl:text>
       <xsl:text>&#xA;</xsl:text>
     </xsl:if>
-    <xsl:text>---&#xA;</xsl:text>
+    <xsl:text>---&#xA;&#xA;</xsl:text>
   </xsl:template>
 
   <!-- Jekyll’s base layout adds the <body> element, so skip that (and related ID/attributes/outputclass/aname) here -->
@@ -61,6 +61,7 @@
     <!--
     </body>
     -->
+    <xsl:text>&#xA;</xsl:text>
   </xsl:template>
 
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
