@@ -44,9 +44,13 @@
     <xsl:text>---&#xA;</xsl:text>
   </xsl:template>
 
-  <!-- Remove redundant <body> element (added later by Jekyll’s base layout) -->
+  <!-- Jekyll’s base layout adds the <body> element, so skip that (and related ID/attributes/outputclass/aname) here -->
   <xsl:template match="*" mode="chapterBody">
-      <xsl:call-template name="setaname"/>  <!-- For HTML4 compatibility, if needed -->
+    <!--
+    <body>
+      <xsl:apply-templates select="." mode="addAttributesToHtmlBodyElement"/>
+      <xsl:call-template name="setaname"/>  <!-\- For HTML4 compatibility, if needed -\-> 
+      -->
       <xsl:apply-templates select="." mode="addHeaderToHtmlBodyElement"/>
 
       <!-- Include a user's XSL call here to generate a toc based on what's a child of topic -->
@@ -54,6 +58,9 @@
 
       <xsl:apply-templates select="." mode="addContentToHtmlBodyElement"/>
       <xsl:apply-templates select="." mode="addFooterToHtmlBodyElement"/>
+    <!--
+    </body>
+    -->
   </xsl:template>
 
   <xsl:template match="node()" mode="jekyll-layout" as="xs:string">
