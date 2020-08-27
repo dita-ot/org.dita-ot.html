@@ -26,19 +26,19 @@
     <xsl:text>layout: </xsl:text>
     <xsl:apply-templates select="." mode="jekyll-layout"/>
     <xsl:text>&#xA;</xsl:text>
-    <xsl:text>title: "</xsl:text>
+    <xsl:text>title: '</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
-    <xsl:text>"&#xA;</xsl:text>
-    <xsl:text>description: "</xsl:text>
+    <xsl:text>'&#xA;</xsl:text>
+    <xsl:text>description: '</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')]" mode="text-only"/>
-    <xsl:text>"&#xA;</xsl:text>
-    <xsl:text>index: "</xsl:text>
+    <xsl:text>'&#xA;</xsl:text>
+    <xsl:text>index: '</xsl:text>
     <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
-    <xsl:text>"&#xA;</xsl:text>
+    <xsl:text>'&#xA;</xsl:text>
     <xsl:if test="normalize-space($commit)">
-      <xsl:text>commit: "</xsl:text>
+      <xsl:text>commit: '</xsl:text>
       <xsl:value-of select="normalize-space($commit)"/>
-      <xsl:text>"&#xA;</xsl:text>
+      <xsl:text>'&#xA;</xsl:text>
     </xsl:if>
     <xsl:if test="(/* | /*/*[contains(@class, ' topic/title ')])[tokenize(@outputclass, '\s+') = 'generated']">
       <xsl:text>generated: true</xsl:text>
