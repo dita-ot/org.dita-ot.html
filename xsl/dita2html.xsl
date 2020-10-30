@@ -29,9 +29,11 @@
     <xsl:text>title: '</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
     <xsl:text>'&#xA;</xsl:text>
-    <xsl:text>description: '</xsl:text>
-    <xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')]" mode="text-only"/>
-    <xsl:text>'&#xA;</xsl:text>
+    <xsl:if test="*[contains(@class, ' topic/shortdesc ')]">
+      <xsl:text>description: '</xsl:text>
+      <xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')]" mode="text-only"/>
+      <xsl:text>'&#xA;</xsl:text>
+    </xsl:if>
     <xsl:text>index: '</xsl:text>
     <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
     <xsl:text>'&#xA;</xsl:text>
