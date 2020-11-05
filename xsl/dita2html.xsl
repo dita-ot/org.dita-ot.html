@@ -26,16 +26,29 @@
     <xsl:text>layout: </xsl:text>
     <xsl:apply-templates select="." mode="jekyll-layout"/>
     <xsl:text>&#xA;</xsl:text>
-    <xsl:text>title: "</xsl:text>
+    <xsl:text>title: '</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
-    <xsl:text>"&#xA;</xsl:text>
-    <xsl:text>index: "</xsl:text>
+    <xsl:text>'&#xA;</xsl:text>
+    <xsl:variable name="shortdescs" as="element()*"
+                  select="*[contains(@class, ' topic/shortdesc ')] |
+                          *[contains(@class, ' topic/abstract ')]/*[contains(@class, ' topic/shortdesc ')]"/>
+    <xsl:if test="exists($shortdescs)">
+      <xsl:text>description: '</xsl:text>
+      <xsl:for-each select="$shortdescs">
+        <xsl:if test="position() ne 1">
+          <xsl:text> </xsl:text>
+        </xsl:if>
+        <xsl:apply-templates select="." mode="text-only"/>
+      </xsl:for-each>
+      <xsl:text>'&#xA;</xsl:text>
+    </xsl:if>
+    <xsl:text>index: '</xsl:text>
     <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
-    <xsl:text>"&#xA;</xsl:text>
+    <xsl:text>'&#xA;</xsl:text>
     <xsl:if test="normalize-space($commit)">
-      <xsl:text>commit: "</xsl:text>
+      <xsl:text>commit: '</xsl:text>
       <xsl:value-of select="normalize-space($commit)"/>
-      <xsl:text>"&#xA;</xsl:text>
+      <xsl:text>'&#xA;</xsl:text>
     </xsl:if>
     <xsl:if test="(/* | /*/*[contains(@class, ' topic/title ')])[tokenize(@outputclass, '\s+') = 'generated']">
       <xsl:text>generated: true</xsl:text>
