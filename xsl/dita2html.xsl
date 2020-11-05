@@ -29,9 +29,17 @@
     <xsl:text>title: '</xsl:text>
     <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
     <xsl:text>'&#xA;</xsl:text>
-    <xsl:if test="*[contains(@class, ' topic/shortdesc ')]">
+    <xsl:variable name="shortdescs" as="element()*"
+                  select="*[contains(@class, ' topic/shortdesc ')] |
+                          *[contains(@class, ' topic/abstract ')]/*[contains(@class, ' topic/shortdesc ')]"/>
+    <xsl:if test="exists($shortdescs)">
       <xsl:text>description: '</xsl:text>
-      <xsl:apply-templates select="*[contains(@class, ' topic/shortdesc ')]" mode="text-only"/>
+      <xsl:for-each select="$shortdescs">
+        <xsl:if test="position() ne 1">
+          <xsl:text> </text>
+        </xsl:if>
+        <xsl:apply-templates select=". mode="text-only"/>
+      </xsl:for-each>
       <xsl:text>'&#xA;</xsl:text>
     </xsl:if>
     <xsl:text>index: '</xsl:text>
