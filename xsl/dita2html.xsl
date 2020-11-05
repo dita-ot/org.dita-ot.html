@@ -36,9 +36,9 @@
       <xsl:text>description: '</xsl:text>
       <xsl:for-each select="$shortdescs">
         <xsl:if test="position() ne 1">
-          <xsl:text> </text>
+          <xsl:text> </xsl:text>
         </xsl:if>
-        <xsl:apply-templates select=". mode="text-only"/>
+        <xsl:apply-templates select="." mode="text-only"/>
       </xsl:for-each>
       <xsl:text>'&#xA;</xsl:text>
     </xsl:if>
