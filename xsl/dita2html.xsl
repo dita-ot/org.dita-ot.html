@@ -125,7 +125,7 @@
 
   <xsl:attribute-set name="toc">
     <xsl:attribute name="class">col-lg-3</xsl:attribute>
-    <xsl:attribute name="role">toc</xsl:attribute>
+    <xsl:attribute name="role">navigation</xsl:attribute>
   </xsl:attribute-set>
 
   <xsl:attribute-set name="nav.ul">
