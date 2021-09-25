@@ -94,5 +94,39 @@
   <xsl:attribute-set name="nav.ul">
     <xsl:attribute name="class">nav nav-list</xsl:attribute>
   </xsl:attribute-set>
+  
+  <xsl:template match="*[contains(@class, ' topic/dt ')][empty(@id)]" mode="commonattributes">
+    <xsl:param name="default-output-class"/>
+    <xsl:attribute name="id" select="replace(lower-case(normalize-space()), ' ', '-')"/>
+    <xsl:next-match>
+      <xsl:with-param name="default-output-class" select="$default-output-class"/>
+    </xsl:next-match>
+  </xsl:template>
 
+  <!-- Retrofit commonattributes to use modes to allow extension --> 
+
+  <xsl:template name="commonattributes">
+    <xsl:param name="default-output-class"/>
+    <xsl:apply-templates select="." mode="commonattributes">
+      <xsl:with-param name="default-output-class" select="$default-output-class"/>
+    </xsl:apply-templates>
+  </xsl:template>
+  
+  <xsl:template match="@* | node()" mode="commonattributes">
+    <xsl:param name="default-output-class"/>
+    <xsl:apply-templates select="@xml:lang"/>
+    <xsl:apply-templates select="@dir"/>
+    <xsl:apply-templates select="*[contains(@class, ' ditaot-d/ditaval-startprop ')]/@outputclass" mode="add-ditaval-style"/>
+    <xsl:apply-templates select="." mode="set-output-class">
+      <xsl:with-param name="default" select="$default-output-class"/>
+    </xsl:apply-templates>
+    <xsl:if test="exists($passthrough-attrs)">
+      <xsl:for-each select="@*">
+        <xsl:if test="$passthrough-attrs[@att = name(current()) and (empty(@val) or (some $v in tokenize(current(), '\s+') satisfies $v = @val))]">
+          <xsl:attribute name="data-{name()}" select="."/>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:if>
+  </xsl:template>
+  
 </xsl:stylesheet>
