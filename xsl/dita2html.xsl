@@ -23,38 +23,75 @@
   <xsl:template match="node()" mode="jekyll-front-matter">
     <xsl:text>---&#xA;</xsl:text>
     <xsl:text># Generated from DITA source&#xA;</xsl:text>
-    <xsl:text>layout: </xsl:text>
-    <xsl:apply-templates select="." mode="jekyll-layout"/>
-    <xsl:text>&#xA;</xsl:text>
-    <xsl:text>title: '</xsl:text>
-    <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
-    <xsl:text>'&#xA;</xsl:text>
+    <xsl:call-template name="yaml-string">
+      <xsl:with-param name="key" select="'layout'"/>
+      <xsl:with-param name="value">
+        <xsl:apply-templates select="." mode="jekyll-layout"/>
+      </xsl:with-param>
+    </xsl:call-template>
+    <xsl:call-template name="yaml-string">
+      <xsl:with-param name="key" select="'title'"/>
+      <xsl:with-param name="value">
+        <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="text-only"/>
+      </xsl:with-param>
+    </xsl:call-template>
     <xsl:variable name="shortdescs" as="element()*"
                   select="*[contains(@class, ' topic/shortdesc ')] |
                           *[contains(@class, ' topic/abstract ')]/*[contains(@class, ' topic/shortdesc ')]"/>
     <xsl:if test="exists($shortdescs)">
-      <xsl:text>description: '</xsl:text>
-      <xsl:for-each select="$shortdescs">
-        <xsl:if test="position() ne 1">
-          <xsl:text> </xsl:text>
-        </xsl:if>
-        <xsl:apply-templates select="." mode="text-only"/>
-      </xsl:for-each>
-      <xsl:text>'&#xA;</xsl:text>
+      <xsl:call-template name="yaml-string">
+        <xsl:with-param name="key" select="'description'"/>
+        <xsl:with-param name="value">
+          <xsl:value-of>
+            <xsl:for-each select="$shortdescs">
+              <xsl:if test="position() ne 1">
+                <xsl:text> </xsl:text>
+              </xsl:if>
+              <xsl:apply-templates select="." mode="text-only"/>
+            </xsl:for-each>
+          </xsl:value-of>
+        </xsl:with-param>
+      </xsl:call-template>
     </xsl:if>
-    <xsl:text>index: '</xsl:text>
-    <xsl:value-of select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
-    <xsl:text>'&#xA;</xsl:text>
+    <xsl:call-template name="yaml-string">
+      <xsl:with-param name="key" select="'index'"/>
+      <xsl:with-param name="value" select="concat($PATH2PROJ, 'toc', $OUTEXT)"/>
+    </xsl:call-template>
     <xsl:if test="normalize-space($commit)">
-      <xsl:text>commit: '</xsl:text>
-      <xsl:value-of select="normalize-space($commit)"/>
-      <xsl:text>'&#xA;</xsl:text>
+      <xsl:call-template name="yaml-string">
+        <xsl:with-param name="key" select="'commit'"/>
+        <xsl:with-param name="value" select="normalize-space($commit)"/>
+      </xsl:call-template>
     </xsl:if>
+    <xsl:call-template name="yaml-string">
+      <xsl:with-param name="key" select="'src'"/>
+      <xsl:with-param name="value" select="concat($FILEDIR, '/', $FILENAME)"/>
+    </xsl:call-template>
     <xsl:if test="(/* | /*/*[contains(@class, ' topic/title ')])[tokenize(@outputclass, '\s+') = 'generated']">
-      <xsl:text>generated: true</xsl:text>
-      <xsl:text>&#xA;</xsl:text>
+      <xsl:call-template name="yaml-boolean">
+        <xsl:with-param name="key" select="'generated'"/>
+        <xsl:with-param name="value" select="true()"/>
+      </xsl:call-template>
     </xsl:if>
     <xsl:text>---&#xA;&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template name="yaml-string">
+    <xsl:param name="key" as="xs:string"/>
+    <xsl:param name="value" as="xs:string"/>
+    <xsl:value-of select="$key"/>
+    <xsl:text>: '</xsl:text>
+    <xsl:value-of select="$value"/>
+    <xsl:text>'&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template name="yaml-boolean">
+    <xsl:param name="key" as="xs:string"/>
+    <xsl:param name="value" as="xs:boolean"/>
+    <xsl:value-of select="$key"/>
+    <xsl:text>: </xsl:text>
+    <xsl:value-of select="$value"/>
+    <xsl:text>&#xA;</xsl:text>
   </xsl:template>
 
   <!-- Jekyll’s base layout adds the <body> element, so skip that (and related ID/attributes/outputclass/aname) here -->
