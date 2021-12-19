@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
-
 <plugin id="org.dita-ot.html">
-  <feature extension="package.version" value="3.6.0"/>
+  <feature extension="package.version" value="3.7.0"/>
   <require plugin="org.dita.html5"/>
   <transtype name="org.dita-ot.html"/>
   <feature extension="ant.import" file="build_dita2org.dita-ot.html.xml"/>
