@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
-
 <plugin id="org.dita-ot.html">
   <feature extension="package.version" value="3.7.0"/>
   <require plugin="org.dita.html5"/>
