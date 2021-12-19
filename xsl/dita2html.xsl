@@ -6,7 +6,6 @@
   version="2.0"
   exclude-result-prefixes="xs dita-ot"
 >
-
   <xsl:import href="plugin:org.dita.html5:xsl/dita2html5Impl.xsl"/>
 
   <xsl:output
@@ -112,14 +111,14 @@
     <body>
       <xsl:apply-templates select="." mode="addAttributesToHtmlBodyElement"/>
       <xsl:call-template name="setaname"/>  <!-\- For HTML4 compatibility, if needed -\-> 
-      -->
-      <xsl:apply-templates select="." mode="addHeaderToHtmlBodyElement"/>
+    -->
+    <xsl:apply-templates select="." mode="addHeaderToHtmlBodyElement"/>
 
-      <!-- Include a user's XSL call here to generate a toc based on what's a child of topic -->
-      <xsl:call-template name="gen-user-sidetoc"/>
+    <!-- Include a user's XSL call here to generate a toc based on what's a child of topic -->
+    <xsl:call-template name="gen-user-sidetoc"/>
 
-      <xsl:apply-templates select="." mode="addContentToHtmlBodyElement"/>
-      <xsl:apply-templates select="." mode="addFooterToHtmlBodyElement"/>
+    <xsl:apply-templates select="." mode="addContentToHtmlBodyElement"/>
+    <xsl:apply-templates select="." mode="addFooterToHtmlBodyElement"/>
     <!--
     </body>
     -->
@@ -143,7 +142,7 @@
   <xsl:attribute-set name="nav.ul">
     <xsl:attribute name="class">nav nav-list</xsl:attribute>
   </xsl:attribute-set>
-  
+
   <xsl:template
     match="*[contains(@class, ' topic/dt ')][empty(@id)]"
     mode="commonattributes"
@@ -161,7 +160,7 @@
     </xsl:next-match>
   </xsl:template>
 
-  <!-- Retrofit commonattributes to use modes to allow extension --> 
+  <!-- Retrofit commonattributes to use modes to allow extension -->
 
   <xsl:template name="commonattributes">
     <xsl:param name="default-output-class"/>
@@ -172,7 +171,7 @@
       />
     </xsl:apply-templates>
   </xsl:template>
-  
+
   <xsl:template match="@* | node()" mode="commonattributes">
     <xsl:param name="default-output-class"/>
     <xsl:apply-templates select="@xml:lang"/>
@@ -194,5 +193,5 @@
       </xsl:for-each>
     </xsl:if>
   </xsl:template>
-  
+
 </xsl:stylesheet>
