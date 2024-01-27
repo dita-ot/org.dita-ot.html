@@ -14,7 +14,7 @@
     depends="org.dita-ot.html.init,
              html5.init,
              build-init,
-             preprocess,
+             preprocess2,
              html5.topic,
              html5.map"
   />
